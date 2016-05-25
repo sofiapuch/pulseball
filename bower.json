@@ -1,0 +1,16 @@
+{
+  "name": "pulseball",
+  "description": "Pulselive-test",
+  "main": "main.html",
+  "authors": [
+    "Sofia Puch <sophiepuch@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "devDependencies": {
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "fontawesome#^4.6.3"
+  }
+}
