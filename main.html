@@ -2,13 +2,58 @@
 
 <head>
 	<title>Pulseball</title>
+	<link rel="stylesheet" type="text/css" href="build/css/test.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-	<h1>Pulseball</h1>
+
+	<div class="container-fluid" ng-app="pulseballApp" ng-controller="pulseballAppCtrl">
+
+		<section>
+			<h1>Pulseball</h1>
+		</section>
+
+		<section ng-init="pulseballInit('src/json/rankings.json')">
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Position</th>
+						<th>Team</th>
+						<th>Points</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in ranking | orderBy:'pos' ">
+						<td>{{row.pos}}</td>
+						<td>{{row.team.name}}</td>
+						<td>{{row.pts}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</section>
 
 
+
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<script src="bower_components/angular/angular.js"></script>
 	<script src="src/js/main.js"></script>
-	<link rel="stylesheet" type="text/css" href="build/css/test.css">
-
+	
 </body>
