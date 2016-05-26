@@ -4,6 +4,8 @@
 	<title>Pulseball</title>
 	<link rel="stylesheet" type="text/css" href="build/css/test.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -12,6 +14,27 @@
 
 		<section>
 			<h1>Pulseball</h1>
+		</section>
+
+		<section class="add-match">
+
+			<form name="addMatchForm">
+
+				<div class="form-group">
+					<label for="new-match">Add json file url</label>
+					<!-- change to get a file instead a url -->
+					<input id="new-match" type="text" class="form-control" ng-model="newMatch" placeholder="src/json/match.json" required>
+				</div>
+
+				<button type="button" class="btn btn-primary" ng-click="addMatch()" ng-disabled="addMatchForm.$invalid" >Submit</button>
+
+			</form>
+
+
+     
+
+
+
 		</section>
 
 		<section ng-init="pulseballInit('src/json/rankings.json')">
@@ -44,13 +67,6 @@
 
 
 	</div>
-
-
-
-
-
-
-
 
 
 	<script src="bower_components/angular/angular.js"></script>
