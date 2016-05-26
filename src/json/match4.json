@@ -1,0 +1,6 @@
+{
+	"matchId": 2566, "description": "Match 5", "teams": [
+		{ "id": 24, "name": "Romania", "abbreviation": "RO" },
+		{ "id": 1, "name": "England", "abbreviation": "ENG" } ],
+	"scores": [ 19, 23 ], "status": "C", "outcome": "A"
+}

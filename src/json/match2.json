@@ -1,0 +1,6 @@
+{
+	"matchId": 2522, "description": "Match 3", "teams": [
+		{ "id": 62, "name": "New Zealand", "abbreviation": "NZ" },
+		{ "id": 1, "name": "England", "abbreviation": "ENG" } ],
+	"scores": [ 19, 23 ], "status": "C", "outcome": "A"
+}

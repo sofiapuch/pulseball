@@ -2,6 +2,7 @@ var pulseballApp = angular.module('pulseballApp', []);
 
 pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope, $http) {
 	
+	$scope.errorLoading = false;
 	$scope.ranking = [];
 
 	$scope.outcome = '';
@@ -24,6 +25,7 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 
 	$scope.pulseballInitError = function (response) {
 		console.log("error loading init");
+		$scope.errorLoading = true;
 	};
 
 
@@ -52,6 +54,7 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 
 	$scope.addMatchError = function (response) {
 		console.log("error loading match");
+		$scope.errorLoading = true;
 	};
 
 	$scope.calculateRatingDifference = function () {

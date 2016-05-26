@@ -2,7 +2,7 @@
 
 <head>
 	<title>Pulseball</title>
-	<link rel="stylesheet" type="text/css" href="build/css/test.css">
+	<link rel="stylesheet" type="text/css" href="build/css/main.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">
 
@@ -13,58 +13,72 @@
 	<div class="container-fluid" ng-app="pulseballApp" ng-controller="pulseballAppCtrl">
 
 		<section>
-			<h1>Pulseball</h1>
+			<h1 class="margin-bottom-30">Welcome to Pulseball</h1>
 		</section>
 
-		<section class="add-match">
-
-			<form name="addMatchForm">
-
-				<div class="form-group">
-					<label for="new-match">Add json file url</label>
-					<!-- change to get a file instead a url -->
-					<input id="new-match" type="text" class="form-control" ng-model="newMatch" placeholder="src/json/match.json" required>
+		<section class="error-section" ng-show="errorLoading">
+			<div class="row">
+				<div class="col-sm-6 col-xs-12">
+					<div class="alert alert-danger">
+						<p>
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+	  						Error trying to load the data
+	  					</p>
+	  				</div>
 				</div>
+			</div>
+			
+		</section>
 
-				<button type="button" class="btn btn-primary" ng-click="addMatch()" ng-disabled="addMatchForm.$invalid" >Submit</button>
+		<section class="add-match-section">
 
-			</form>
+			<div class="row">
+				<form name="addMatchForm">
 
+					<div class="col-md-4 col-sm-6 col-xs-9">
+						<div class="form-group">
+							<label for="new-match">
+								<i class="fa fa-file-code-o" aria-hidden="true"></i> Add json file url
+							</label>
+							<input id="new-match" type="text" class="form-control" ng-model="newMatch" placeholder="src/json/match.json" required>
+						</div>
+					</div>
+					<div class="col-md-1 col-sm-3 col-xs-3">
+						<button type="button" class="btn btn-primary" ng-click="addMatch()" ng-disabled="addMatchForm.$invalid" >Submit</button>
+					</div>
 
-     
+				</form>
 
-
-
+			</div>
+    
 		</section>
 
 		<section ng-init="pulseballInit('src/json/rankings.json')">
 
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Position</th>
-						<th>Team</th>
-						<th>Points</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="row in ranking | orderBy:'pts':true ">
-						<td>{{ranking.indexOf(row)+1}}</td>
-						<td>{{row.team.name}}</td>
-						<td>{{row.pts | number:2}}</td>
-					</tr>
-				</tbody>
-			</table>
+			<h3 class="margin-bottom-30">Rankings table</h3>
+
+			<div class="row">
+				<div class="col-md-8 col-xs-12">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Position</th>
+								<th>Team</th>
+								<th>Points</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="row in ranking | orderBy:'pts':true ">
+								<td>{{ranking.indexOf(row)+1}}</td>
+								<td>{{row.team.name}}</td>
+								<td>{{row.pts | number:2}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 
 		</section>
-
-
-
-
-
-
-
-
 
 	</div>
 
