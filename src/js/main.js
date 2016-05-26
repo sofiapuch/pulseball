@@ -31,6 +31,7 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 
 	//get new match from server
 	$scope.addMatch = function () {
+		$scope.errorLoading = false;
 		$scope.getJsonFromUrl( $scope.newMatch,  $scope.addMatchSuccess, $scope.addMatchError);
 	};
 
@@ -64,8 +65,6 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 			actualPoints[i] = $scope.getActualPoints($scope.teamIds[i]);
 		}
 
-		console.log("before points: ", actualPoints);
-
 		var difference = (actualPoints[0] + 3) - actualPoints[1];
 		//round to two decimals
 		difference = difference.toFixed(2);
@@ -98,12 +97,14 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 			actualPoints[0] += amount; //home points
 			actualPoints[1] -= amount; //away points
 		}
+
 		//away wins
 		if ($scope.outcome == 'B') {
 			amount = (1 + (difference/10));
 			actualPoints[0] -= amount;
 			actualPoints[1] += amount;
 		}
+
 		//draw
 		if ($scope.outcome == 'D') {
 			amount = difference/10;
@@ -112,20 +113,15 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 			}
 		}
 
-		console.log(actualPoints);
-
 		for (var i=0; i<$scope.teamIds.length; i++) {
 			$scope.setNewPoints($scope.teamIds[i], actualPoints[i]);
 		}
 
 		$scope.sortNewRanking();
 
-		console.log("ranking: ", $scope.ranking);
-
 	};
 
 	$scope.setNewPoints = function (id, newPoints) {
-
 		angular.forEach($scope.ranking, function(value, key) {
 			if(value.team.id == id) {
 				value.pts = parseFloat(newPoints.toFixed(2));
@@ -134,7 +130,6 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 	};
 
 	$scope.sortNewRanking = function () {
-
 		$scope.ranking.sort(function( a, b) {
 			return b.pts - a.pts;
 		});
