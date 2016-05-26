@@ -61,6 +61,8 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 			actualPoints[i] = $scope.getActualPoints($scope.teamIds[i]);
 		}
 
+		console.log("before points: ", actualPoints);
+
 		var difference = (actualPoints[0] + 3) - actualPoints[1];
 		//round to two decimals
 		difference = difference.toFixed(2);
@@ -68,12 +70,7 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 		if (difference > 10) difference = 10;
 		if (difference < -10) difference = -10;
 
-		console.log(difference);
-
-		
-		
-
-
+		$scope.calculatePointsAmount(actualPoints, difference);
 	};
 
 	$scope.getActualPoints = function(id) {
@@ -88,33 +85,57 @@ pulseballApp.controller('pulseballAppCtrl', ['$scope', '$http', function( $scope
 		return points;
 	};
 
+	$scope.calculatePointsAmount = function (actualPoints, difference) {
 
-
-
-
-
-
-
-		/*
+		var amount = 0;
 
 		//home wins
-		if (outcome == 'A') {
-
+		if ($scope.outcome == 'A') {
+			amount = (1 - (difference/10));
+			actualPoints[0] += amount; //home points
+			actualPoints[1] -= amount; //away points
 		}
-
 		//away wins
-		if (outcome == 'B') {
-
+		if ($scope.outcome == 'B') {
+			amount = (1 + (difference/10));
+			actualPoints[0] -= amount;
+			actualPoints[1] += amount;
 		}
-
 		//draw
-		if (outcome == 'D') {
-
+		if ($scope.outcome == 'D') {
+			amount = difference/10;
+			for (i=0; i<actualPoints.length; i++) {
+				actualPoints[i] += amount;
+			}
 		}
 
-		*/
+		console.log(actualPoints);
 
+		for (var i=0; i<$scope.teamIds.length; i++) {
+			$scope.setNewPoints($scope.teamIds[i], actualPoints[i]);
+		}
 
+		$scope.sortNewRanking();
+
+		console.log("ranking: ", $scope.ranking);
+
+	};
+
+	$scope.setNewPoints = function (id, newPoints) {
+
+		angular.forEach($scope.ranking, function(value, key) {
+			if(value.team.id == id) {
+				value.pts = parseFloat(newPoints.toFixed(2));
+			}	
+		});
+	};
+
+	$scope.sortNewRanking = function () {
+
+		$scope.ranking.sort(function( a, b) {
+			return b.pts - a.pts;
+		});
+	};
 
 
 }]);
